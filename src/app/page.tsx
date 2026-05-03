@@ -1,4 +1,5 @@
 import { scoreTone, seedProjects } from "@/lib/projects";
+import { ScannerBoard } from "@/components/scanner-board";
 import { getSupabaseBrowserClient, rowToProject, type ProjectRow } from "@/lib/supabase";
 
 async function getProjects() {
@@ -92,42 +93,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="scanner" className="mx-auto max-w-7xl px-6 py-14 sm:px-10 lg:px-16">
-        <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-emerald-300">Scanner board</p>
-            <h2 className="mt-2 text-4xl font-black">Prioritas farming minggu ini</h2>
-          </div>
-          <p className="max-w-xl text-zinc-400">Pantau peluang GameFi terbaru berdasarkan quest activity, chain signal, funding strength, social growth, dan risk profile.</p>
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <article key={project.name} className="group rounded-3xl border border-white/10 bg-white/[0.045] p-5 transition hover:-translate-y-1 hover:border-cyan-300/40 hover:bg-white/[0.07]">
-              <div className="mb-5 flex items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-2xl font-black">{project.name}</h3>
-                  <p className="mt-1 text-sm text-zinc-400">{project.chain} • {project.status}</p>
-                </div>
-                <div className={`rounded-2xl bg-gradient-to-r ${scoreTone(project.score)} px-3 py-2 font-black`}>
-                  {project.score}%
-                </div>
-              </div>
-              <div className="mb-5 flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-black/30 px-3 py-1 text-xs text-cyan-100">#{tag}</span>
-                ))}
-              </div>
-              <dl className="grid grid-cols-2 gap-3 text-sm">
-                <div className="rounded-2xl bg-black/25 p-3"><dt className="text-zinc-500">Risk</dt><dd className="font-bold">{project.risk}</dd></div>
-                <div className="rounded-2xl bg-black/25 p-3"><dt className="text-zinc-500">Users</dt><dd className="font-bold">{project.users}</dd></div>
-                <div className="col-span-2 rounded-2xl bg-black/25 p-3"><dt className="text-zinc-500">Funding signal</dt><dd className="font-bold">{project.funding}</dd></div>
-              </dl>
-              <p className="mt-5 text-sm leading-6 text-zinc-300">{project.action}</p>
-            </article>
-          ))}
-        </div>
-      </section>
+      <ScannerBoard projects={projects} />
 
       <section id="method" className="mx-auto max-w-7xl px-6 pb-16 sm:px-10 lg:px-16">
         <div className="rounded-[2rem] border border-white/10 bg-gradient-to-br from-white/[0.08] to-white/[0.03] p-8">
