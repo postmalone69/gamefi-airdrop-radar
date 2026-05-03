@@ -3,8 +3,8 @@ import { getSupabaseAdminClient, projectToUpsert } from "@/lib/supabase";
 import type { AirdropProject } from "@/lib/projects";
 
 export async function POST(request: NextRequest) {
-  const expectedSecret = process.env.ADMIN_INGEST_SECRET;
-  const providedSecret = request.headers.get("authorization")?.replace("Bearer ", "");
+  const expectedSecret = process.env.ADMIN_INGEST_SECRET?.trim();
+  const providedSecret = request.headers.get("authorization")?.replace("Bearer ", "").trim();
 
   if (!expectedSecret || providedSecret !== expectedSecret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

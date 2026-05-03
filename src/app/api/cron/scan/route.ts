@@ -3,8 +3,8 @@ import { scanGameFiSources } from "@/lib/scanner";
 import { getSupabaseAdminClient, projectToUpsert } from "@/lib/supabase";
 
 export async function GET(request: NextRequest) {
-  const expectedSecret = process.env.CRON_SECRET;
-  const providedSecret = request.headers.get("authorization")?.replace("Bearer ", "");
+  const expectedSecret = process.env.CRON_SECRET?.trim();
+  const providedSecret = request.headers.get("authorization")?.replace("Bearer ", "").trim();
 
   if (expectedSecret && providedSecret !== expectedSecret) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
