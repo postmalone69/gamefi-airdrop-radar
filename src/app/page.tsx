@@ -82,7 +82,7 @@ export default function Home() {
             <p className="text-sm uppercase tracking-[0.3em] text-emerald-300">Scanner board</p>
             <h2 className="mt-2 text-4xl font-black">Prioritas farming minggu ini</h2>
           </div>
-          <p className="max-w-xl text-zinc-400">MVP seed data dulu. Step berikutnya: connect API/Cron scraper untuk Galxe, Zealy, DappRadar, CryptoRank, dan X signals.</p>
+          <p className="max-w-xl text-zinc-400">Pantau peluang GameFi terbaru berdasarkan quest activity, chain signal, funding strength, social growth, dan risk profile.</p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
