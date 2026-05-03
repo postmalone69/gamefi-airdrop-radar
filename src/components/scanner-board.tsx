@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import type { AirdropProject } from "@/lib/projects";
 import { scoreTone } from "@/lib/projects";
 
-const chains = ["All", "Ronin", "Base", "Solana", "Immutable", "Proof of Play", "Ethereum / Layer-2", "Multi-chain"];
 const risks = ["All", "Low", "Medium", "High"];
 
 export function ScannerBoard({ projects }: { projects: AirdropProject[] }) {
@@ -12,6 +11,8 @@ export function ScannerBoard({ projects }: { projects: AirdropProject[] }) {
   const [chain, setChain] = useState("All");
   const [risk, setRisk] = useState("All");
   const [minScore, setMinScore] = useState(0);
+
+  const chains = useMemo(() => ["All", ...Array.from(new Set(projects.map((project) => project.chain)))], [projects]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();

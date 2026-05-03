@@ -40,9 +40,14 @@ export default async function Home() {
                 <h1 className="font-semibold">Airdrop Radar</h1>
               </div>
             </div>
-            <a className="rounded-full border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:border-cyan-300 hover:text-cyan-200" href="#scanner">
-              Open scanner
-            </a>
+            <div className="flex items-center gap-2">
+              <a className="rounded-full border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:border-cyan-300 hover:text-cyan-200" href="#scanner">
+                Open scanner
+              </a>
+              <a className="rounded-full border border-white/15 px-4 py-2 text-sm text-zinc-200 hover:border-emerald-300 hover:text-emerald-200" href="/admin">
+                Admin
+              </a>
+            </div>
           </nav>
 
           <div className="grid gap-10 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
