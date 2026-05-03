@@ -1,14 +1,30 @@
-import { scoreTone, seedProjects as projects } from "@/lib/projects";
+import { scoreTone, seedProjects } from "@/lib/projects";
+import { getSupabaseBrowserClient, rowToProject, type ProjectRow } from "@/lib/supabase";
 
-const stats = [
-  { label: "Tracked projects", value: projects.length.toString() },
-  { label: "High-score targets", value: projects.filter((p) => p.score >= 80).length.toString() },
-  { label: "Chains covered", value: new Set(projects.map((p) => p.chain)).size.toString() },
-  { label: "MVP mode", value: "Public" },
-];
+async function getProjects() {
+  const supabase = getSupabaseBrowserClient();
 
-export default function Home() {
+  if (!supabase) return { projects: seedProjects, source: "seed" };
+
+  const { data, error } = await supabase
+    .from("airdrop_projects")
+    .select("*")
+    .order("score", { ascending: false });
+
+  if (error || !data?.length) return { projects: seedProjects, source: "fallback" };
+
+  return { projects: (data as ProjectRow[]).map(rowToProject), source: "supabase" };
+}
+
+export default async function Home() {
+  const { projects, source } = await getProjects();
   const topProject = projects[0];
+  const stats = [
+    { label: "Tracked projects", value: projects.length.toString() },
+    { label: "High-score targets", value: projects.filter((p) => p.score >= 80).length.toString() },
+    { label: "Chains covered", value: new Set(projects.map((p) => p.chain)).size.toString() },
+    { label: "Data source", value: source },
+  ];
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#070A12] text-white">
