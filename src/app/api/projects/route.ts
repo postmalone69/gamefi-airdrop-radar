@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import { seedProjects } from "@/lib/projects";
 import { getSupabaseBrowserClient, rowToProject, type ProjectRow } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET() {
   const supabase = getSupabaseBrowserClient();
 

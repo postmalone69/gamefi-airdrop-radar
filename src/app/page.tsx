@@ -2,6 +2,9 @@ import { scoreTone, seedProjects } from "@/lib/projects";
 import { ScannerBoard } from "@/components/scanner-board";
 import { getSupabaseBrowserClient, rowToProject, type ProjectRow } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 async function getProjects() {
   const supabase = getSupabaseBrowserClient();
 
